@@ -25,7 +25,7 @@ def getAllEmp():
 @app.route('/newid')
 def idnew():
     newid = uuid.uuid4
-    return jsonify(newid)
+    return jsonify({'id':newid})
 
 @app.route('/sendMessage/<dest>/<msg>')
 def send_message(dest,msg):
