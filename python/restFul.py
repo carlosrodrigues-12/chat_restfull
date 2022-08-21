@@ -1,7 +1,25 @@
 from flask import Flask, render_template
 from markupsafe import escape
+from flask import jsonify
 
 app = Flask(__name__)
+
+empDB=[
+ {
+ 'id':'101',
+ 'name':'Saravanan S',
+ 'title':'Technical Leader'
+ },
+ {
+ 'id':'201',
+ 'name':'Rajkumar P',
+ 'title':'Sr Software Engineer'
+ }
+]
+
+@app.route('/empdb/employee',methods=['GET'])
+def getAllEmp():
+    return jsonify({'emps':empDB})
 
 @app.route('/sendMessage/<dest>/<msg>')
 def send_message(dest,msg):
