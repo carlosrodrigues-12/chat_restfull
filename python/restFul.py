@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+import uuid
 from markupsafe import escape
 from flask import jsonify
 
@@ -20,6 +21,11 @@ empDB=[
 @app.route('/empdb/employee',methods=['GET'])
 def getAllEmp():
     return jsonify({'emps':empDB})
+
+@app.route('/newid')
+def idnew():
+    newid = uuid.uuid4
+    return jsonify(newid)
 
 @app.route('/sendMessage/<dest>/<msg>')
 def send_message(dest,msg):
