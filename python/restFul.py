@@ -1,3 +1,4 @@
+from crypt import methods
 from flask import Flask, render_template
 import uuid
 from markupsafe import escape
@@ -22,7 +23,7 @@ empDB=[
 def getAllEmp():
     return jsonify({'emps':empDB})
 
-@app.route('/newid')
+@app.route('/newid',methods=['GET'])
 def idnew():
     newid = uuid.uuid4
     return newid
