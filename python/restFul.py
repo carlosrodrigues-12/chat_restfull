@@ -1,6 +1,5 @@
-from flask import Flask
+from flask import Flask, render_template
 from markupsafe import escape
-from flask import render_tamplate
 
 app = Flask(__name__)
 
@@ -19,4 +18,4 @@ def index():
 @app.route("/hello/")
 @app.route("/hello/<name>")
 def hello_world(name=None):
-    return render_tamplate('template.html', name=name)
+    return render_template('template.html', name=name)
