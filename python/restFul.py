@@ -1,4 +1,3 @@
-from re import template
 from flask import Flask
 from markupsafe import escape
 from flask import render_tamplate
