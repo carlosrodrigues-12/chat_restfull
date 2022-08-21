@@ -1,5 +1,7 @@
+from re import template
 from flask import Flask
 from markupsafe import escape
+from flask import render_tamplate
 
 app = Flask(__name__)
 
@@ -15,6 +17,7 @@ def show_user_profile(username):
 def index():
     return "<p>Index Page<p>"
 
-@app.route("/hello")
-def hello_world():
-        return "<p>Hello, World!<p>"
+@app.route("/hello/")
+@app.route("/hello/<name>")
+def hello_world(name=None):
+    return render_tamplate('template.html', name=name)
