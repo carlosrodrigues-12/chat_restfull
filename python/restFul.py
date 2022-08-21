@@ -10,16 +10,12 @@ print(id)
 app = Flask(__name__)
 
 empDB=[
- {
- 'id':'101',
- 'name':'Saravanan S',
- 'title':'Technical Leader'
- },
- {
- 'id':'201',
- 'name':'Rajkumar P',
- 'title':'Sr Software Engineer'
- }
+    {
+        'chat_id':'1365468792',
+        'from':'From user',
+        'dest':'Dest user',
+        'msg':'Bom dia, tudo bem?'
+    }
 ]
 
 @app.route('/empdb/employee',methods=['GET'])
@@ -30,9 +26,15 @@ def getAllEmp():
 def idnew():
     return id
 
-@app.route('/sendMessage/<dest>/<msg>')
+@app.route('/sendMessage/<dest>/<msg>', methods=['GET','POST'])
 def send_message(dest,msg):
-    return f'New Message: Destinatario: {escape(dest)} Message: {escape(msg)}'
+    return '''
+        <form method="post">
+            <p><input type=text name=username>
+            <p><input type=submit value=Login>
+        </form>
+    '''
+    # return f'New Message: Destinatario: {escape(dest)} Message: {escape(msg)}'
 
 @app.route('/user/<username>')
 def show_user_profile(username):
