@@ -13,7 +13,7 @@ empDB=[
     {
         'chat_id':'1365468792',
         'from':'From user',
-        'dest':'Dest user',
+        'dest':'Bob',
         'msg':'Bom dia, tudo bem?'
     }
 ]
@@ -36,9 +36,15 @@ def send_message(dest,msg):
     '''
     # return f'New Message: Destinatario: {escape(dest)} Message: {escape(msg)}'
 
-@app.route('/user/<username>')
-def show_user_profile(username):
-    return f'User {escape(username)}'
+@app.route('/getMessage/<username>', methods=['GET'])
+def getMessages(username):
+    usr = [ emp for emp in empDB if (emp['dest'] == username)]
+    return jsonify({'Messages':usr})
+
+@app.route('/empdb/employee/<empId>',methods=['GET'])
+def getEmp(empId):
+    usr = [ emp for emp in empDB if (emp['id'] == empId) ] 
+    return jsonify({'emp':usr})
 
 @app.route("/")
 def index():
