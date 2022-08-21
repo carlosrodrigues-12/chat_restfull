@@ -28,7 +28,7 @@ def getAllEmp():
 
 @app.route('/newid',methods=['GET'])
 def idnew():
-    newid = uuid.uuid4
+    newid = uuid.uuid4()
     return newid
 
 @app.route('/sendMessage/<dest>/<msg>')
