@@ -4,7 +4,7 @@ import uuid
 from markupsafe import escape
 from flask import jsonify
 
-id = uuid.uuid4
+id = uuid.uuid4()
 print(id)
 
 app = Flask(__name__)
