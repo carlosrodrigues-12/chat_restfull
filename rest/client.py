@@ -6,7 +6,6 @@ import sys
 import const 
 import requests
 import threading
-# Handle interactive loop
 
 app = Flask(__name__)
 
@@ -19,25 +18,25 @@ def createEmp():
     'msg':request.json['msg'],
     'id':request.json['id'],
     }
-    #resposta = requests.post(dest_addr, data=data) #2
+
     if(request.json['id'] == ''):
-        print(str(request.json['count']) + " - MSG: " + request.json['msg'] + " - FROM: " +  request.json['name']) # just print the message and destination
+        print(str(request.json['count']) + " - MSG: " + request.json['msg'] + " - FROM: " +  request.json['name'])
     else:
-        print("RESPONDING TO: " + request.json['id'] +" - MSG: " + request.json['msg'] + " - FROM: " +  request.json['name']) # just print the message and destination
+        print("RESPONDING TO: " + request.json['id'] +" - MSG: " + request.json['msg'] + " - FROM: " +  request.json['name'])
     return "ACK"
 
-me = str(sys.argv[1]) # User's name (as registered in the registry. E.g., Alice, Bob, ...)
+me = str(sys.argv[1])
 
 def sending():
     while True:
         dest = ''
         id = ''
-        reply = input("REPLY? (y or n): \n")
+        reply = input("REPLY MESSAGE? (y or n): ")
 
         if (reply == 'y'):
-            id = input("ENTER MESSAGE ID: \n")
-        dest = input("ENTER DESTINATION: \n")
-        msg = input("ENTER MESSAGE: \n")
+            id = input("ENTER MESSAGE ID: ")
+        dest = input("ENTER DESTINATION: ")
+        msg = input("ENTER MESSAGE: ")
 
         data = {
             'dest':dest,
@@ -47,12 +46,10 @@ def sending():
             'id':id,
         }
 
-        # Send message and wait for confirmation
-        resposta = requests.post(const.CHAT_SERVER_HOST+":"+str(const.CHAT_SERVER_PORT)+'/chat', json = data) #2
+        resposta = requests.post(const.CHAT_SERVER_HOST+":"+str(const.CHAT_SERVER_PORT)+'/chat', json = data)
         if resposta.text != "ACK":
             print("Error: Server did not accept the message (dest does not exist?)")
         else:
-            #print("Received Ack from server")
             pass
 
 def receiving():
@@ -60,8 +57,8 @@ def receiving():
 
 if __name__ == '__main__':
     
-    send = threading.Thread(target=sending)
-    send.start()
-    
     receive = threading.Thread(target=receiving)
     receive.start()
+
+    send = threading.Thread(target=sending)
+    send.start()
