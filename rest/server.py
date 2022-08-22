@@ -1,30 +1,28 @@
 
-from flask import Flask
-from flask import jsonify
-from flask import request
+from flask import Flask, request, jsonify
 import const 
 import requests
 
 count = 0
-
 app = Flask(__name__)
 
 @app.route('/chat',methods=['POST'])
-def createEmp():
+def createChat():
     global count
     count +=1
 
     dados = {
-    'dest':request.json['dest'],
-    'name':request.json['name'],
-    'msg':request.json['msg'],
-    'id':request.json['id'],
-    'count':count,
+        'dest':request.json['dest'],
+        'remt':request.json['remt'],
+        'msg':request.json['msg'],
+        'id':request.json['id'],
+        'count':count,
     }
     ip = const.registry[request.json['dest']][0]
     port = const.registry[request.json['dest']][1]
 
-    print(str(count) + " - RELAYING MSG: " + request.json['msg'] + " - FROM: " +  request.json['name'] + " - TO: " +  request.json['dest'] + '\n')
+    print("FROM: " +  request.json['name'] + " - TO: " +  request.json['dest'] +
+        str(count) + " - RELAYING MSG: " + request.json['msg'] + '\n')
     resposta = requests.post(ip+":"+str(port)+'/chat', json = dados)
     return "ACK"
 

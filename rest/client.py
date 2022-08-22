@@ -1,35 +1,32 @@
 
 from time import sleep
-from flask import Flask
-from flask import jsonify
-from flask import request
+from flask import Flask, request, jsonify
 import sys
 import const 
 import requests
 import threading
 
 count = 0
-
 app = Flask(__name__)
 
 @app.route('/chat',methods=['POST'])
-def createEmp():
+def createChat():
     global count
     count+=1
+
     dados = {
-    'dest':request.json['dest'],
-    'name':request.json['name'],
-    'msg':request.json['msg'],
-    'id':request.json['id'],
+        'dest':request.json['dest'],
+        'remt':request.json['remt'],
+        'msg':request.json['msg'],
+        'id':request.json['id'],
     }
 
     if(request.json['id'] == ''):
-        print(str(request.json['count']) + " - MSG: " + request.json['msg'] + " - FROM: " +  request.json['name'])
+        print("FROM: " +  request.json['remt'] + str(request.json['count']) + " - MSG: " + request.json['msg'])
     else:
-        print("RESPONDING TO: " + request.json['id'] +" - MSG: " + request.json['msg'] + " - FROM: " +  request.json['name'])
+        print("FROM: " +  request.json['remt'] + " - RESPONDING TO: " + request.json['id'] +
+        " - MSG: " + request.json['msg'])
     return "ACK"
-
-me = str(sys.argv[1])
 
 def sending():
     while True:
@@ -47,7 +44,7 @@ def sending():
 
         data = {
             'dest':dest,
-            'name':me,
+            'remt':me,
             'msg':msg,
             'ip':const.registry[me][0],
             'id':id,
@@ -61,6 +58,8 @@ def sending():
 
 def receiving():
     app.run(host="0.0.0.0",port=const.registry[me][1],debug=False)
+
+me = str(sys.argv[1])
 
 if __name__ == '__main__':
     
