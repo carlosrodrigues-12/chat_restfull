@@ -3,15 +3,12 @@ import os
 from flask import Flask, request, session, jsonify
 from datetime import datetime
 
-id_msg = 0
-
 app = Flask(__name__)
 
 messages = []
 
-myuuid = uuid.uuid4()
-
 def add_message(remt,dest,msg):
+    id_msg = 0
     moment = datetime.now().strftime("%H:%M:%S")
     messages.append({"timestamp": moment, "remt": remt, "dest": dest, "message": msg, "id_msg": id_msg+1})
 
