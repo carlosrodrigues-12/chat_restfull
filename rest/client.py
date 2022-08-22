@@ -8,11 +8,14 @@ import const
 import requests
 import threading
 
+count = 0
+
 app = Flask(__name__)
 
 @app.route('/chat',methods=['POST'])
 def createEmp():
-
+    global count
+    count+=1
     dados = {
     'dest':request.json['dest'],
     'name':request.json['name'],
@@ -30,9 +33,11 @@ me = str(sys.argv[1])
 
 def sending():
     while True:
+        global count
         dest = ''
         id = ''
-        reply = input("REPLY MESSAGE? (y or n): ")
+        if count>0:
+            reply = input("REPLY MESSAGE? (y or n): ")
 
         if (reply == 'y'):
             id = input("ENTER MESSAGE ID: ")
