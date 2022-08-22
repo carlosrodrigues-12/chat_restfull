@@ -1,4 +1,3 @@
-
 from time import sleep
 from flask import Flask, request, jsonify
 import sys
@@ -28,7 +27,7 @@ def createChat():
         " - MSG: " + request.json['msg'])
     return "ACK"
 
-def sending():
+def send():
     while True:
         global count
         dest = ''
@@ -56,15 +55,15 @@ def sending():
         else:
             pass
 
-def receiving():
+def recv():
     app.run(host="0.0.0.0",port=const.registry[me][1],debug=False)
 
 me = str(sys.argv[1])
 
 if __name__ == '__main__':
     
-    receive = threading.Thread(target=receiving)
-    receive.start()
+    r = threading.Thread(target=recv)
+    r.start()
     sleep(2)
-    send = threading.Thread(target=sending)
-    send.start()
+    s = threading.Thread(target=send)
+    s.start()
