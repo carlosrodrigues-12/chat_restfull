@@ -21,7 +21,7 @@ def createChat():
     }
 
     if(request.json['id'] == ''):
-        print("FROM: " +  request.json['remt'] + str(request.json['count']) + " - MSG: " + request.json['msg'])
+        print("FROM: " +  request.json['remt'] + ' ID: ' + str(request.json['count']) + " - MSG: " + request.json['msg'])
     else:
         print("FROM: " +  request.json['remt'] + " - RESPONDING TO: " + request.json['id'] +
         " - MSG: " + request.json['msg'])
