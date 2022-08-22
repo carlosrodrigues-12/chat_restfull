@@ -1,4 +1,5 @@
 
+from time import sleep
 from flask import Flask
 from flask import jsonify
 from flask import request
@@ -59,6 +60,6 @@ if __name__ == '__main__':
     
     receive = threading.Thread(target=receiving)
     receive.start()
-
+    sleep(2)
     send = threading.Thread(target=sending)
     send.start()
