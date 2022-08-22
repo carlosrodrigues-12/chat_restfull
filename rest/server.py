@@ -20,7 +20,7 @@ def createChat():
     ip = const.registry[request.json['dest']][0]
     port = const.registry[request.json['dest']][1]
 
-    print("FROM: " +  request.json['name'] + " - TO: " +  request.json['dest'] +
+    print("FROM: " +  request.json['remt'] + " - TO: " +  request.json['dest'] +
         str(count) + " - RELAYING MSG: " + request.json['msg'] + '\n')
     resposta = requests.post(ip+":"+str(port)+'/chat', json = dados)
     return "ACK"
