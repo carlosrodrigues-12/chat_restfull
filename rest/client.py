@@ -36,6 +36,7 @@ def sending():
         global count
         dest = ''
         id = ''
+        reply = 'n'
         if count>0:
             reply = input("REPLY MESSAGE? (y or n): ")
 
