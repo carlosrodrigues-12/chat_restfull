@@ -5,11 +5,9 @@ from flask import request
 import const 
 import requests
 
-app = Flask(__name__)
-
-print("Chat Server is ready...")
-
 count = 0
+
+app = Flask(__name__)
 
 @app.route('/chat',methods=['POST'])
 def createEmp():
@@ -32,3 +30,5 @@ def createEmp():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",port=5000)
+
+    print("Chat Server is ready...")
