@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for
 import os
 from datetime import datetime
 
@@ -10,6 +10,10 @@ messages = []
 def add_message(remt,dest,msg):
     moment = datetime.now().strftime("%H:%M:%S")
     messages.append({"timestamp": moment, "remt": remt, "dest": dest, "message": msg})
+
+@app.route('/', methods=['POST'])
+def login_user():
+
 
 @app.route('/sendMessage/<dest>/<msg>', methods=['GET','POST'])
 def send_message(dest,msg):
