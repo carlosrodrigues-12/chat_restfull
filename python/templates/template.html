@@ -15,7 +15,7 @@
         <button>Send message.</button>
     </form>
     {% for message in chat_messages %}
-        <p>({{ message.timestamp }}) {{ message.from }}: {{ message.message }}</p>
+        <p>Remetente: null {{ message.dest }}: {{ message.message }} ({{ message.timestamp }})</p>
     {%endfor%}
     <script>
         let textbox = document.getElementById("message")
